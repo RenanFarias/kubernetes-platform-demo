@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-demo-apps
+  labels:
+    app: devops-demo
+specs: 
+  replicas: 2
+
+  selector:
+    matchlabels:
+      app: devops-demo
+  
+  template:
+    metadata:
+      labels:
+        app: devops-demo
+    
+    spec:
+      containers:
+        - name: devops-demo
+          image: ghcr.io/renanfarias.devops-cicd-pipeline-lab/devops-cicd-demo:latest
+
+          ports:
+            - containerPort: 8000
+
+          resources:
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
